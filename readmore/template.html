@@ -1,0 +1,31 @@
+<div x-data="{ 
+    isCollapsed: true, 
+    originalContent: '', 
+    content: '',
+    isMobile: window.innerWidth < 768
+    }" x-init="
+    originalContent = $root.firstElementChild.innerHTML.trim(); 
+    content = $root.firstElementChild.firstElementChild.firstElementChild.innerHTML.trim();
+    window.addEventListener('resize', () => { isMobile = window.innerWidth < 768 });
+    " style=""> <!-- e.g. style="text-align: center;" to always center the text-->
+    <div style="display: none;">
+        <div class="m-0"> <!-- This <div> is always visible -->
+            <strong>
+                Text 1 <!-- only the text (not the strong) is shown when hidden-->
+            </strong>
+        </div>
+        <div class="mb-0"> <!-- This div is hidden on mobile until user clicks READ MORE -->
+            <br>
+            <p>
+                Text 2
+            </p>
+        </div>
+    </div>
+    <div x-html="(isCollapsed) ? 
+        (isMobile ? `<p style='margin: 0;'>${content}</p>`: originalContent) : originalContent" class="p-0 my-0 mx-auto">
+    </div>
+    <button class="font-bold underline" @click="isCollapsed = !isCollapsed" x-show="isMobile" style="padding-top: 12px;"
+            x-text="isCollapsed ? 'Read More' : 'Read Less'">
+        Read More
+    </button>
+</div>

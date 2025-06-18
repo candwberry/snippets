@@ -1,0 +1,41 @@
+<div x-data="{ 
+    isCollapsed: true, 
+    originalContent: '', 
+    content: '',
+    isMobile: window.innerWidth < 768
+    }" x-init="
+    originalContent = $root.firstElementChild.innerHTML.trim(); 
+    content = $root.firstElementChild.firstElementChild.firstElementChild.innerHTML.trim();
+    window.addEventListener('resize', () => { isMobile = window.innerWidth < 768 });
+    " class="text-center">
+    <div style="display: none;">
+        <span class="m-0">
+           <strong style="font-size: 16px;"">To celebrate our upcoming Trade Show, we're giving away a FREE Bosch
+                    0615990N30 18V 4-Piece Brushless Cordless Tool Kit that consists of a GSB 18V-110 C Cordless Hammer
+                    Drill, GDX 18V-210 C Cordless Impact Driver, GBH 18V-28 C Cordless Rotary Hammer with SDS+ Plus
+                    Attachment, GWX 18V-10 SC Cordless Angle Grinder, 3 x GBA 18V 5.0Ah Batteries, 1 x GAL 1880 CV Quick
+                    Charger, 3 x 136 L-Boxx, and 1 x 238 L-Boxx.
+            </strong>
+        </span>
+        <span class="mb-0">
+            <br>
+            <br>
+            <p>
+                <span style="font-size: 16px;">To be in with a chance to win, simply complete the <a href="#bosch-form"
+                        class="opacity-100 hover:text-linkhover hover:opacity-1"><u>form below</u></a> or enter via one
+                    of our social media pages by liking or sharing one of our posts and following the respective page
+                    (Facebook, Instagram or Twitter only). The competition closes at 23:59 on Thursday 11<sup>th</sup>
+                    of September and the winner will be announced and contacted via email or private message on Saturday
+                    13<sup>th</sup> of September.</span>
+            </p>
+        </span>
+    </div>
+    <div x-html="(isCollapsed) ? 
+        (isMobile ? `<p style='margin: 0;'>${content}</p>`: originalContent) : originalContent"
+        class="p-0 my-0 mx-auto">
+    </div>
+    <button class="font-bold underline" @click="isCollapsed = !isCollapsed" x-show="isMobile" style="padding-top: 12px;"
+        x-text="isCollapsed ? 'Read More' : 'Read Less'">
+        Read More
+    </button>
+</div>
